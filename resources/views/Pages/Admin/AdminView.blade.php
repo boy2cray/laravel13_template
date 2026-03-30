@@ -21,13 +21,16 @@
         title='Data Admin'
         description='Halaman berisi informasi data admin'
         :addbutton=true
-        :showImport=true
     />
 
     {{-- TABEL UTAMA --}}
+    <livewire:admin.admin-data />
    
     
     {{-- MODAL --}}
+    <livewire:admin.add-admin />
+    <livewire:admin.edit-admin />
+    <livewire:admin.del-admin />
     
     
 </div>

@@ -10,9 +10,11 @@
             @tutup-modal-pinjaman.window="modalTambah = false"  
         >
 
-        <livewire:beranda />
+    {{-- TABEL UTAMA --}}
 
-        {{-- modal --}}
+    <livewire:beranda />
+
+    {{-- modal --}}
         
     
 </div>

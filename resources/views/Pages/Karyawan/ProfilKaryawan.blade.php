@@ -17,18 +17,13 @@
             @close-modal-import.window="modalImport = false"     
         >
 
-    <x-headerHalaman
-        title='Profil Karyawan'
-        description='Halaman berisi informasi profil karyawan'
-         :addbutton=false
-    />
 
     {{-- TABEL UTAMA --}}
+    <livewire:karyawan.karyawan-profil />
     
    
-    
     {{-- MODAL --}}
-   
+    <livewire:karyawan.ganti-password />
     
 </div>
 

@@ -8,13 +8,15 @@
                 modalEdit : false,
                 modalHapus : false,
                 modalImport : false,
+                modalEksport : false,
             }"
             @close-modal.window="modalTambah = false"
             @close-edit-modal.window="modalEdit = false"
             @tampil-edit-modal.window="modalEdit = true"
             @close-hapus-modal.window="modalHapus = false"
             @tampil-hapus-modal.window="modalHapus = true"
-            @close-modal-import.window="modalImport = false"     
+            @close-modal-import.window="modalImport = false"
+            @close-modal-eksport.window="modalEksport = false"    
         >
 
     <x-headerHalaman
@@ -22,6 +24,7 @@
         description='Halaman berisi informasi data karyawan'
         :addbutton=true
         :showImport=true
+        :showEksport=true
     />
 
     {{-- TABEL UTAMA --}}
@@ -33,6 +36,7 @@
     <livewire:karyawan.edit-karyawan />
     <livewire:karyawan.del-karyawan />
     <livewire:karyawan.import-karyawan />
+    <livewire:karyawan.eksport-karyawan />
     
 </div>
 

@@ -6,7 +6,9 @@
     'buttonIcon' => 'plus',
     'idModal' => 'modalTambah',
     'showImport' => false,
-    'idImport' => 'modalImport'
+    'showEksport' => false,
+    'idImport' => 'modalImport',
+    'idEksport' => 'modalEksport'
 ])
 
 <div class="flex mb-6 flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-2xl shadow-sm border border-transparent
@@ -30,8 +32,8 @@
                     @click="{{ $idImport }} = true" 
                     type="button"
                     class="inline-flex items-center justify-center gap-2 px-5 py-2.5 w-full xs:w-auto 
-                        bg-white/90 dark:bg-slate-700/30 text-emerald-700 dark:text-emerald-200 font-bold text-sm rounded-xl 
-                        border border-emerald-200 dark:border-emerald-500 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all active:scale-95"
+                    bg-white/90 dark:bg-slate-700/30 text-emerald-700 dark:text-emerald-200 font-bold text-sm rounded-xl 
+                    border border-emerald-200 dark:border-emerald-500 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all active:scale-95"
                 >
                     <i class="fa-solid fa-file-excel text-base"></i>
                     <span>Import Excel</span>
@@ -44,10 +46,23 @@
                 class="inline-flex items-center justify-center gap-2 px-6 py-2.5 w-full xs:w-auto 
                     bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white 
                     font-black text-sm rounded-xl shadow-lg shadow-blue-200 dark:shadow-none transition-all transform active:scale-95 group"
-            >
+                >
                 <i class="fa-solid fa-{{ $buttonIcon }} transition-transform group-hover:rotate-90"></i>
                 <span>{{ $buttonLabel }}</span>
             </button>
+
+            @if ($showEksport)
+                <button 
+                    @click="{{ $idEksport }} = true"  
+                    type="button"
+                    class="inline-flex items-center justify-center gap-2 px-5 py-2.5 w-full xs:w-auto 
+                    bg-white/90 dark:bg-slate-700/30 text-emerald-700 dark:text-emerald-200 font-bold text-sm rounded-xl 
+                    border border-emerald-200 dark:border-emerald-500 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all active:scale-95"
+                >
+                    <i class="fa-solid fa-download text-base"></i>
+                    <span>Export Excel</span>
+                </button>
+            @endif
         </div>
     @endif
 </div>

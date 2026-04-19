@@ -17,6 +17,23 @@ return [
                 ['title' => 'Data Admin', 'route' => 'admin'],
             ]
         ],
+        [
+            'title' => 'Menu Level 1',
+            'icon' => 'fas fa-database',
+            'roles' => ['su',],
+            'submenu' => [
+                ['title' => 'Menu Level 2', 'route' => '#'],
+                ['title' => 'Menu Level 2', 'route' => '#'],
+                [
+                    'title' => 'Menu dengan Level 3',
+                    'child' => [
+                        ['title' => 'Menu Level 3', 'route' => '#'],
+                        ['title' => 'Menu Level 3', 'route' => '#'],
+                    ]
+                ],
+                
+            ]
+        ],
         
     ]
 ];

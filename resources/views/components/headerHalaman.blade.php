@@ -6,48 +6,66 @@
     'buttonIcon' => 'plus',
     'idModal' => 'modalTambah',
     'showImport' => false,
-    'idImport' => 'modalImport'
+    'showEksport' => false,
+    'idImport' => 'modalImport',
+    'idEksport' => 'modalEksport'
 ])
 
-<div class="flex mb-6 flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-2xl shadow-sm border border-transparent
-    bg-linear-to-r from-sky-100 via-cyan-50 to-blue-100 dark:bg-linear-to-r dark:from-slate-800 dark:via-blue-900 dark:to-slate-900 dark:border-slate-700 transition-all">
+<div class="group relative flex flex-col md:flex-row md:items-center justify-between gap-5 p-6 md:p-8 mb-6 bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-md border border-slate-100 dark:border-slate-700 transition-all duration-300 overflow-hidden z-0">
+    
+    {{-- Latar Belakang Dekoratif (Subtle Glow) --}}
+    <div class="absolute top-0 right-0 w-64 h-64 bg-linear-to-br from-blue-100 to-transparent dark:from-slate-700/50 rounded-full blur-3xl opacity-50 -z-10 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
 
     {{-- Info Halaman --}}
-    <div class="space-y-1">
-        <h1 class="text-xl sm:text-2xl font-black text-indigo-900 dark:text-sky-200 tracking-tight">
-            {{ $title }}
-        </h1>
-        <p class="text-sm font-medium text-indigo-700 dark:text-slate-300 italic">
-            {{ $description }}
-        </p>
+    <div class="flex items-center gap-4 z-10">
+        {{-- Garis Aksen Kiri --}}
+        <div class="w-1.5 h-12 bg-blue-600 dark:bg-blue-500 rounded-full hidden sm:block"></div>
+        
+        <div class="space-y-1.5">
+            <h1 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white tracking-tight">
+                {{ $title }}
+            </h1>
+            <p class="text-sm font-medium text-slate-500 dark:text-slate-400">
+                {{ $description }}
+            </p>
+        </div>
     </div>
 
     {{-- Kelompok Tombol Aksi --}}
-    @if ($addbutton)
-        <div class="flex flex-col xs:flex-row items-center gap-3">
-            @if ($showImport)
-                <button 
-                    @click="{{ $idImport }} = true" 
-                    type="button"
-                    class="inline-flex items-center justify-center gap-2 px-5 py-2.5 w-full xs:w-auto 
-                        bg-white/90 dark:bg-slate-700/30 text-emerald-700 dark:text-emerald-200 font-bold text-sm rounded-xl 
-                        border border-emerald-200 dark:border-emerald-500 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all active:scale-95"
-                >
-                    <i class="fa-solid fa-file-excel text-base"></i>
-                    <span>Import Excel</span>
-                </button>
-            @endif
+    <div class="flex flex-wrap items-center gap-3 z-10 w-full md:w-auto">
+        
+        @if ($showImport)
+            <button 
+                @click="{{ $idImport }} = true" 
+                type="button"
+                class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 font-semibold text-sm rounded-xl border border-emerald-200 dark:border-emerald-800/50 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-600 transition-all duration-200 active:scale-95"
+            >
+                <i class="fa-solid fa-file-excel"></i>
+                <span>Import Excel</span>
+            </button>
+        @endif
+        
+        @if ($showEksport)
+            <button 
+                @click="{{ $idEksport }} = true"  
+                type="button"
+                class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-50 dark:bg-slate-700/50 text-slate-600 dark:text-slate-300 font-semibold text-sm rounded-xl border border-slate-200 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-200 active:scale-95"
+            >
+                <i class="fa-solid fa-download"></i>
+                <span>Export Excel</span>
+            </button>
+        @endif
 
+        @if ($addbutton)
             <button 
                 @click="{{ $idModal }} = true" 
                 type="button"
-                class="inline-flex items-center justify-center gap-2 px-6 py-2.5 w-full xs:w-auto 
-                    bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white 
-                    font-black text-sm rounded-xl shadow-lg shadow-blue-200 dark:shadow-none transition-all transform active:scale-95 group"
-            >
-                <i class="fa-solid fa-{{ $buttonIcon }} transition-transform group-hover:rotate-90"></i>
+                class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-xl shadow-xs hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-200 active:scale-95 group"
+                >
+                <i class="fa-solid fa-{{ $buttonIcon }} transition-transform duration-300 group-hover:rotate-90"></i>
                 <span>{{ $buttonLabel }}</span>
             </button>
-        </div>
-    @endif
+        @endif
+
+    </div>
 </div>

@@ -45,7 +45,7 @@ class DelKaryawan extends Component
     {
         //validasi gerbang
         if (Gate::denies('kelola-database-utama')) {
-            $this->alert('error', 'Anda tidak memiliki kewenangan');
+            $this->error('Anda tidak memiliki kewenangan...');
             return;
         }
         
@@ -53,7 +53,7 @@ class DelKaryawan extends Component
 
         //cek agar tidak bisa menghapus data sendiri
         if ($data->id === Auth::user()->id_karyawan) {
-            $this->alert('error', 'Anda tidak dapat menghapus data diri sendiri');
+            $this->error('Anda tidak dapat menghapus data diri sendiri');
             return;
         }
 
@@ -63,7 +63,7 @@ class DelKaryawan extends Component
         delete_file($this->hapus_file);
         
         //Kirim event
-        $this->alert('success', 'Data karyawan berhasil dihapus');
+        $this->success('Data berhasil dihapus');
         $this->dispatch('refresh-table');
         $this->dispatch('close-hapus-modal');
 

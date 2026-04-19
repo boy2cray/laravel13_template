@@ -46,10 +46,7 @@ class Register extends Component
             'otoritas' => $this->otoritas
         ]);
 
-        $this->alert('warning', 'Pendaftaran berhasil, lanjut login?', [
-            'confirm' => true,
-            'onConfirm' => 'lanjutLogin'
-        ]);
+        $this->confirm('Pendaftaran berhasil, Lanjut Login ?','lanjutLogin');
     }
 
     public function lanjutLogin()

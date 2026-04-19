@@ -44,7 +44,7 @@ class AddKaryawan extends Component
     {
         //validasi gerbang
         if (Gate::denies('kelola-database-utama')) {
-            $this->alert('error', 'Anda tidak memiliki kewenangan');
+            $this->error('Anda tidak memiliki kewenangan...');
             return;
         }
         
@@ -58,7 +58,7 @@ class AddKaryawan extends Component
         Karyawan::create($validasi);
 
         // Feedback & Reset
-        $this->alert('success', 'Data karyawan berhasil disimpan');
+        $this->success('Data berhasil disimpan');
         $this->dispatch('close-modal');
         $this->dispatch('refresh-table'); // Untuk refresh table di parent
         

@@ -2,50 +2,69 @@
 
 namespace App\Livewire\Traits;
 
-use Illuminate\Support\Facades\Log;
-
 trait WithAlert
 {
-    /**
-     * Tampilkan alert dengan SweetAlert2
-     * 
-     * @param string $type Tipe alert: 'success', 'error', 'warning', 'info'
-     * @param string $message Pesan yang ditampilkan
-     * @param array $options Opsi tambahan (confirm, onConfirm, toast, dll)
-     */
-    protected function alert(
-        string $type,
-        string $message,
-        array $options = []
-    ): void {
-        
-        // Validasi type
-        $validTypes = ['success', 'error', 'warning', 'info'];
-        if (!in_array($type, $validTypes)) {
-            $type = 'info';
-        }
+    protected function dispatchAlert(array $data): void
+    {
+        $data['componentId'] = $this->getId();
 
-        $payload = array_merge([
-            'type'    => $type,
+        $this->dispatch('app:alert', $data);
+    }
+
+    // ✅ SUCCESS
+    protected function success(string $message, string $title = 'Berhasil'): void
+    {
+        $this->dispatchAlert([
+            'type' => 'success',
+            'title' => $title,
             'message' => $message,
-            'title'   => match ($type) {
-                'error'   => 'Oops...',
-                'warning' => 'Perhatian',
-                'info'    => 'Informasi',
-                default   => 'Berhasil'
-            },
-            'toast'   => in_array($type, ['success', 'info']),
-            'confirm' => false,
-            // Mengambil ID unik komponen untuk keperluan callback
-            'componentId' => $this->getId(), 
-        ], $options);
-        
-        // Validasi onConfirm jika confirm true
-        if ($payload['confirm'] && !isset($payload['onConfirm'])) {
-            Log::warning('Alert dengan confirm=true harus memiliki onConfirm', ['componentId' => $this->getId()]);
-        }
+            'toast' => true,
+        ]);
+    }
 
-        // Mengirim payload sebagai satu objek utuh, bukan argumen terpisah
-        $this->dispatch('app:alert', $payload);
+    // ❌ ERROR
+    protected function error(string $message, string $title = 'Oops...'): void
+    {
+        $this->dispatchAlert([
+            'type' => 'error',
+            'title' => $title,
+            'message' => $message,
+        ]);
+    }
+
+    // ⚠️ WARNING
+    protected function warning(string $message, string $title = 'Perhatian'): void
+    {
+        $this->dispatchAlert([
+            'type' => 'warning',
+            'title' => $title,
+            'message' => $message,
+        ]);
+    }
+
+    // ℹ️ INFO
+    protected function info(string $message, string $title = 'Informasi'): void
+    {
+        $this->dispatchAlert([
+            'type' => 'info',
+            'title' => $title,
+            'message' => $message,
+            'toast' => true,
+        ]);
+    }
+
+    // 🔥 CONFIRM
+    protected function confirm(
+        string $message,
+        string $method,
+        string $title = 'Konfirmasi'
+    ): void {
+        $this->dispatchAlert([
+            'type' => 'warning',
+            'title' => $title,
+            'message' => $message,
+            'confirm' => true,
+            'onConfirm' => $method,
+        ]);
     }
 }

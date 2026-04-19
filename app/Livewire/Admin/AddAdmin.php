@@ -41,7 +41,7 @@ class AddAdmin extends Component
     {
         //validasi gerbang
         if (Gate::denies('kelola-database-utama')) {
-            $this->alert('error', 'Anda tidak memiliki kewenangan');
+            $this->error('Anda tidak memiliki akses...');
             return;
         }
 
@@ -55,7 +55,7 @@ class AddAdmin extends Component
         ]);
 
         //kirim event
-        $this->alert('success', 'Data Admin berhasil ditambah');
+        $this->success('Data berhasil disimpan');
         $this->dispatch('refresh-table');
         $this->dispatch('close-modal');
 

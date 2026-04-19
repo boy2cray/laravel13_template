@@ -45,21 +45,21 @@ class DelAdmin extends Component
     {
         //validasi gerbang
         if (Gate::denies('kelola-database-utama')) {
-            $this->alert('error', 'Anda tidak memiliki kewenangan');
+            $this->error('Anda tidak memiliki akses...');
             return;
         }
 
         //cegah menghapus diri sendiri
         if (Auth::id() == $this->dataId)
         {
-            $this->alert('error', 'Anda tidak bisa menghapus akun anda sendiri');
+            $this->error('Anda tidak bisa menghapus akun anda sendiri');
             return;
         }
         
         $data = User::findOrFail($this->dataId)->delete();
         
         //Kirim event
-        $this->alert('success', 'Data Admin berhasil dihapus');
+        $this->success('Data Admin berhasil dihapus');
         $this->dispatch('refresh-table');
         $this->dispatch('close-hapus-modal');
 

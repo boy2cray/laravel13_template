@@ -53,7 +53,7 @@ class EditAdmin extends Component
     public function editData()
     {
         if (Gate::denies('kelola-database-utama')) {
-            $this->alert('error', 'Anda tidak memiliki kewenangan');
+            $this->error('Anda tidak memiliki akses...');
             return;
         }
         
@@ -69,7 +69,7 @@ class EditAdmin extends Component
         $data->update(['otoritas' => $validasi['edit_otoritas']]);
 
         //kirim event
-        $this->alert('success', 'Data Admin berhasil diedit');
+        $this->success('Data berhasil diedit');
         $this->dispatch('refresh-table');
         $this->dispatch('close-edit-modal');
 
